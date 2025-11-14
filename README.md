@@ -13,10 +13,14 @@ This assignment implements a simple ETL data pipeline on AWS using Terraform and
 4. The transformed data is written as a CSV file into a destination S3 bucket under the folder output/india_temperatures/
 All infrastructure (S3 buckets, IAM role, Glue job) is provisioned with Terraform.
 
+
+
 **Dataset:**
 I used the Climate Change Earth Surface Temperature Data from Kaggle:
 
 Link for the Dataset: https://www.kaggle.com/datasets/berkeleyearth/climate-change-earth-surface-temperature-data?select=GlobalLandTemperaturesByMajorCity.csv
+
+
 
 **Configurations:**
   
@@ -37,11 +41,15 @@ resource "aws_s3_bucket" "destination_bucket" {
 If you change the bucket names in main.tf, you must update them in transform.py as well.
 
 
+
+
 **Glue job Script:**
 In main.tf, the Glue job references the ETL script stored in the source bucket:
 script_location = "s3://${aws_s3_bucket.source_bucket.bucket}/scripts/transform.py"
 This means the script must be uploaded to:
 s3://etl-source-bucket-sagarr/scripts/transform.py
+
+
 
 
 ***Terraform Deployment Steps**
@@ -63,6 +71,8 @@ Glue job: etl_transform_job
 
 Once the required infrastructure is provisioned, upload the Script and Dataset
 
+
+
 **Upload transform.py script to source S3 bucket**
 The Glue job runs the ETL script from S3
 
@@ -70,10 +80,14 @@ Upload the script to the scripts folder of the source bucket:
 
 aws s3 cp transform.py s3://etl-source-bucket-sagarr/scripts/transform.py
 
+
+
 **Upload dataset to source S3 bucket**
 Upload the Kaggle CSV dataset GlobalLandTemperaturesByCity.csv 
 
 Upload to the input folder of the source bucket: s3://etl-source-bucket-sagarr/input/GlobalLandTemperaturesByCity.csv
+
+
 
 
 **Glue ETL Script Logic:**
@@ -109,8 +123,12 @@ Write result as CSV to the destination bucket:
     .csv(dest_path)
 job.commit()
 
+
+
 **Result**: 
 The pipeline produces India-specific temperature records between 2000 and 2010 and saves them under: s3://etl-destination-bucket-sagarr/output/india_temperatures/
+
+
 
 **Running and Testing the Data Pipeline:**
 
@@ -125,6 +143,8 @@ Navigate to the folder output/india_temperatures/: You should see a part .csv fi
 Download that CSV file and verify: All rows have Country = "India" and "Year" is between 2000 and 2010, and "AverageTemperature" is not null.
 
 This confirms that the created pipeline is working as expected.
+
+
 
 **Cleanup**
 To remove all infrastructure created by Terraform:
