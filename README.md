@@ -2,7 +2,7 @@
 
 This assignment implements a simple ETL data pipeline on AWS using Terraform and AWS Glue
 
-**Flow of operations:**
+**1) Flow of operations:**
 
 1. A public dataset "GlobalLandTemperaturesByCity.csv" is uploaded to an S3 source bucket
 2. An AWS Glue job reads the CSV file from the source bucket.
@@ -15,14 +15,14 @@ All infrastructure (S3 buckets, IAM role, Glue job) is provisioned with Terrafor
 
 
 
-**Dataset:**
+**2) Dataset:**
 I used the Climate Change Earth Surface Temperature Data from Kaggle:
 
 Link for the Dataset: https://www.kaggle.com/datasets/berkeleyearth/climate-change-earth-surface-temperature-data?select=GlobalLandTemperaturesByMajorCity.csv
 
 
 
-**Configurations:**
+**3) Configurations:**
   
 **Bucket creation:**
 In both main.tf and transform.py, the following bucket names are used:
@@ -125,12 +125,12 @@ job.commit()
 
 
 
-**Result**: 
+**4) Result**: 
 The pipeline produces India-specific temperature records between 2000 and 2010 and saves them under: s3://etl-destination-bucket-sagarr/output/india_temperatures/
 
 
 
-**Running and Testing the Data Pipeline:**
+**5) Running and Testing the Data Pipeline:**
 
 Run the Glue Job from the console and wait until the job status becomes Succeeded.
 
@@ -146,7 +146,7 @@ This confirms that the created pipeline is working as expected.
 
 
 
-**Cleanup**
+**6) Cleanup**
 To remove all infrastructure created by Terraform:
 
 From your project folder, run the following command:
