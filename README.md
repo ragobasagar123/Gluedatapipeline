@@ -28,17 +28,21 @@ Link for the Dataset: https://www.kaggle.com/datasets/berkeleyearth/climate-chan
 In both main.tf and transform.py, the following bucket names are used:
 
 SOURCE_BUCKET = "etl-source-bucket-sagarr"
+
 DEST_BUCKET   = "etl-destination-bucket-sagarr"
 
 In main.tf, S3 buckets creation:
+
 Input Bucket:
 resource "aws_s3_bucket" "source_bucket" {
   bucket        = "etl-source-bucket-sagarr"
 }
+
 Output Bucket:
 resource "aws_s3_bucket" "destination_bucket" {
   bucket        = "etl-destination-bucket-sagarr"
 }
+
 If you change the bucket names in main.tf, you must update them in transform.py as well.
 
 
@@ -46,8 +50,11 @@ If you change the bucket names in main.tf, you must update them in transform.py 
 
 **3.2) Glue job Script:**
 In main.tf, the Glue job references the ETL script stored in the source bucket:
+
 script_location = "s3://${aws_s3_bucket.source_bucket.bucket}/scripts/transform.py"
+
 This means the script must be uploaded to:
+
 s3://etl-source-bucket-sagarr/scripts/transform.py
 
 
@@ -55,10 +62,13 @@ s3://etl-source-bucket-sagarr/scripts/transform.py
 
 ***3.3) Terraform Deployment Steps**
 From Terraform project folder: C:\Users\ragoba\Terraform\etl_project
-Run:
+
+Run the following commands:
 Initialize Terraform: ..\terraform.exe init
-Then review the plan: ..\terraform.exe plan
-Then apply the configuration: ..\terraform.exe apply
+
+To review the plan: ..\terraform.exe plan
+
+To apply the configuration: ..\terraform.exe apply
 
 Terraform will create:
 
@@ -95,9 +105,11 @@ Upload to the input folder of the source bucket: s3://etl-source-bucket-sagarr/i
 The ETL logic in transform.py:
 
 SOURCE_BUCKET = "etl-source-bucket-sagarr"
+
 DEST_BUCKET   = "etl-destination-bucket-sagarr"
 
 source_path = f"s3://{SOURCE_BUCKET}/input/GlobalLandTemperaturesByCity.csv"
+
 dest_path   = f"s3://{DEST_BUCKET}/output/india_temperatures/"
 
 #Read input CSV from the source bucket:
