@@ -60,7 +60,7 @@ s3://etl-source-bucket-sagarr/scripts/transform.py
 
 
 
-***3.3) Terraform Deployment Steps**
+**3.3) Terraform Deployment Steps**
 From Terraform project folder: C:\Users\ragoba\Terraform\etl_project
 
 Run the following commands:
@@ -120,6 +120,7 @@ df = (
     .option("inferSchema", "true")
     .csv(source_path)
 )
+
 Drop rows with null AverageTemperature: df_clean = df.filter(df["AverageTemperatue].isNotNull())
 
 Filter for years 2000–2010: df_clean = df_clean.filter((col("Year") >= 2000) & (col("Year") <= 2010))
