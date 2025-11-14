@@ -26,6 +26,7 @@ Link for the Dataset: https://www.kaggle.com/datasets/berkeleyearth/climate-chan
   
 **3.1) Bucket creation:**
 In both main.tf and transform.py, the following bucket names are used:
+
 SOURCE_BUCKET = "etl-source-bucket-sagarr"
 DEST_BUCKET   = "etl-destination-bucket-sagarr"
 
