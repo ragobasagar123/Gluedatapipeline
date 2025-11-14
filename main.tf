@@ -10,9 +10,9 @@ provider "aws" {
   region = "us-east-2"
 }
 
-# ---------------------
-# S3 buckets
-# ---------------------
+
+# S3 buckets creation
+
 
 resource "aws_s3_bucket" "source_bucket" {
   bucket = "etl-source-bucket-sagarr"
@@ -41,9 +41,8 @@ resource "aws_s3_bucket_public_access_block" "destination_bucket_block" {
   restrict_public_buckets = true
 }
 
-# ---------------------
-# Glue IAM role
-# ---------------------
+
+# Glue IAM role creation
 
 resource "aws_iam_role" "glue_role" {
   name = "glue-etl-role-assignment"
@@ -99,9 +98,7 @@ resource "aws_iam_role_policy" "glue_policy" {
   })
 }
 
-# ---------------------
-# Glue job
-# ---------------------
+# Glue job creation
 
 resource "aws_glue_job" "etl_job" {
   name     = "etl_transform_job"
@@ -122,4 +119,5 @@ resource "aws_glue_job" "etl_job" {
     "--TempDir"      = "s3://${aws_s3_bucket.source_bucket.bucket}/temp/"
   }
 }
+
 
