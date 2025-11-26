@@ -61,9 +61,9 @@ s3://etl-source-bucket-sagarr/scripts/transform.py
 
 
 **3.3) Terraform Deployment Steps**
-From Terraform project folder: C:\Users\ragoba\Terraform\etl_project
+Now place the attached main.tf file in your local folder like this: C:\Users\ragoba\Terraform\etl_project
 
-Run the following commands:
+Run the following commands from the folder where you placed main.tf file:
 Initialize Terraform: ..\terraform.exe init
 
 To review the plan: ..\terraform.exe plan
